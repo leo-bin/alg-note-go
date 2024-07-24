@@ -1,6 +1,7 @@
 package leetcode
 
 import (
+	"sort"
 	"testing"
 )
 
@@ -55,7 +56,7 @@ func Test_SearchRange(t *testing.T) {
 		nums := testCase.Nums
 		target := testCase.Target
 		expectResult := testCase.ExpectResult
-		actualResult := searchRange(nums, target)
+		actualResult := searchRangeV2(nums, target)
 		if len(actualResult) != 2 {
 			t.Errorf("test case %v,failed,result num not 2", i)
 		}
@@ -67,6 +68,7 @@ func Test_SearchRange(t *testing.T) {
 	}
 }
 
+// searchRange 区间二分查找
 func searchRange(nums []int, target int) []int {
 	result := []int{-1, -1}
 
@@ -96,6 +98,27 @@ func searchRange(nums []int, target int) []int {
 			right = mid - 1
 		}
 	}
+
+	return result
+}
+
+// searchRangeV2 区间二分查找，优化v2
+func searchRangeV2(nums []int, target int) []int {
+	result := []int{-1, -1}
+
+	// base case
+	if len(nums) <= 0 {
+		return result
+	}
+
+	firstResult := sort.SearchInts(nums, target)
+	if firstResult == len(nums) || nums[firstResult] != target {
+		return result
+	}
+
+	lastResult := sort.SearchInts(nums, target+1) - 1
+
+	result[0], result[1] = firstResult, lastResult
 
 	return result
 }
