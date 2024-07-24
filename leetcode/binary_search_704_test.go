@@ -1,4 +1,4 @@
-package sort_and_search
+package leetcode
 
 import "testing"
 
