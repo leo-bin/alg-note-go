@@ -110,7 +110,7 @@ func Test_MergeKLists(t *testing.T) {
 	for i, testCase := range testCaseList {
 		lists := testCase.Lists
 		expectResult := testCase.ExpectResult
-		actualResult := mergeKLists(lists)
+		actualResult := mergeKListsV2(lists)
 		for actualResult != nil && expectResult != nil {
 			if actualResult.Val != expectResult.Val {
 				t.Errorf("test case %v,not passed", i)
@@ -128,7 +128,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
-// mergeKLists 合并K个有序链表，时间复杂度：O(n*Logk)，空间复杂度：O(k)
+// mergeKLists 合并K个有序链表，小顶堆思路，时间复杂度：O(n*Logk)，空间复杂度：O(k)
 func mergeKLists(lists []*ListNode) *ListNode {
 	dummy := &ListNode{}
 	cur := dummy
@@ -188,4 +188,50 @@ func (h *hp) Pop() any {
 	*h = old[0 : n-1]
 	// 返回最小堆
 	return min
+}
+
+// mergeKListsV2 合并K个有序链表，分治思想，时间复杂度：O(n*Logk)，空间复杂度：O(logk)
+func mergeKListsV2(lists []*ListNode) *ListNode {
+	// base case
+	n := len(lists)
+	if n == 0 {
+		return nil
+	}
+	if n == 1 {
+		return lists[0]
+	}
+
+	// 先合并左边的
+	leftLists := mergeKListsV2(lists[0 : n/2])
+	// 在合并右边的
+	rightLists := mergeKListsV2(lists[n/2 : n])
+	// 左右进行合并
+	return merge2Lists(leftLists, rightLists)
+}
+
+// merge2Lists 合并两个有序链表
+func merge2Lists(list1 *ListNode, list2 *ListNode) *ListNode {
+	dummy := &ListNode{}
+	cur := dummy
+
+	for list1 != nil && list2 != nil {
+		// 找最小的最为cur的下一个节点
+		if list1.Val <= list2.Val {
+			cur.Next = list1
+			list1 = list1.Next
+		} else {
+			cur.Next = list2
+			list2 = list2.Next
+		}
+		// cur指针往后走
+		cur = cur.Next
+	}
+	// 剩下的链表直接插入到最后（因为有序）
+	if list1 != nil {
+		cur.Next = list1
+	} else {
+		cur.Next = list2
+	}
+
+	return dummy.Next
 }
