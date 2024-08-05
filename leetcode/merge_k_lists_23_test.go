@@ -128,6 +128,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
+// mergeKLists 合并K个有序链表，时间复杂度：O(n*Logk)，空间复杂度：O(k)
 func mergeKLists(lists []*ListNode) *ListNode {
 	dummy := &ListNode{}
 	cur := dummy
