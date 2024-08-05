@@ -85,10 +85,10 @@ func Test_ListPartition(t *testing.T) {
 	}
 }
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
+//type ListNode struct {
+//	Val  int
+//	Next *ListNode
+//}
 
 func listPartition(head *ListNode, x int) *ListNode {
 	leftDummy := &ListNode{}
