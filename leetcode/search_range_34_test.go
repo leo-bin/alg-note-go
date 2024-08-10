@@ -1,7 +1,6 @@
 package leetcode
 
 import (
-	"sort"
 	"testing"
 )
 
@@ -111,14 +110,31 @@ func searchRangeV2(nums []int, target int) []int {
 		return result
 	}
 
-	firstResult := sort.SearchInts(nums, target)
+	//firstResult := sort.SearchInts(nums, target)
+	firstResult := binarySearchLower(nums, target)
+	// 没找到
 	if firstResult == len(nums) || nums[firstResult] != target {
 		return result
 	}
 
-	lastResult := sort.SearchInts(nums, target+1) - 1
+	//lastResult := sort.SearchInts(nums, target+1) - 1
+	lastResult := binarySearchLower(nums, target+1) - 1
 
 	result[0], result[1] = firstResult, lastResult
 
 	return result
+}
+
+// binarySearchLower 二分查找，如果目标值有多个，返回最小的下标
+func binarySearchLower(nums []int, target int) int {
+	left, right := 0, len(nums)-1
+	for left <= right {
+		mid := left + (right-left)/2
+		if nums[mid] >= target {
+			right = mid - 1
+		} else {
+			left = mid + 1
+		}
+	}
+	return left
 }

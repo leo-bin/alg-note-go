@@ -54,13 +54,13 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 // 这里通过设置虚拟头结点来实现
 func removeNthFromEndV2(head *ListNode, n int) *ListNode {
 	dummy := &ListNode{0, head}
-	p1, p2 := head, dummy
+	p1, p2 := dummy, dummy
 	// 1.先让p1先走n步
 	for i := 0; i < n; i++ {
 		p1 = p1.Next
 	}
 	// 2.p2开始跟着p1走，直到p1结束
-	for p1 != nil {
+	for p1.Next != nil {
 		p1 = p1.Next
 		p2 = p2.Next
 	}
