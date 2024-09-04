@@ -1,4 +1,4 @@
-package leetcode
+package 二分查找问题
 
 import (
 	"testing"

@@ -1,4 +1,4 @@
-package leetcode
+package 双指针解决数组问题
 
 import "testing"
 

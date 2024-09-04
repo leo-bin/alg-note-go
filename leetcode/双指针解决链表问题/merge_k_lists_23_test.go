@@ -1,4 +1,4 @@
-package leetcode
+package 双指针解决链表问题
 
 import (
 	"container/heap"

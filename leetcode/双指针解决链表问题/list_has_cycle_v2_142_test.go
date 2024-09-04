@@ -1,4 +1,4 @@
-package leetcode
+package 双指针解决链表问题
 
 import "testing"
 
@@ -22,7 +22,7 @@ func detectCycle(head *ListNode) *ListNode {
 	return nil
 }
 
-// detectCycleV2 双指针
+// detectCycleV2 双指针解决链表问题
 // 思路：
 // p1和p2分别为慢指针和快指针，p1每次走一步，p2每次走2步
 // 只要有环，p1和p2必定相遇
