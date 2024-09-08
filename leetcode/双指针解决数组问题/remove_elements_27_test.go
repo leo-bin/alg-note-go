@@ -2,7 +2,7 @@ package 双指针解决数组问题
 
 import "testing"
 
-// 移除元素 leetcode-27
+// 移除元素 leetcode-27 easy
 // 链接：https://leetcode.cn/problems/remove-element/description/
 // 题目介绍：
 // 给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素。

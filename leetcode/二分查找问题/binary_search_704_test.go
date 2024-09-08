@@ -2,7 +2,7 @@ package 二分查找问题
 
 import "testing"
 
-// 二分查找 leetcode 704
+// 二分查找 leetcode-704 easy
 // https://leetcode.cn/problems/binary-search/
 //
 // 题目介绍：

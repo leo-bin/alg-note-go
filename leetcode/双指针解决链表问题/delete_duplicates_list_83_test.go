@@ -2,7 +2,7 @@ package 双指针解决链表问题
 
 import "testing"
 
-// 删除排序链表中的重复元素 leetcode-83
+// 删除排序链表中的重复元素 leetcode-83 easy
 // 链接：https://leetcode.cn/problems/remove-duplicates-from-sorted-list/
 // 题目描述：
 // 给定一个已排序的链表的头 head

@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-// 合并K个链表，leetcode 23
+// 合并K个链表，leetcode-23 hard
 // https://leetcode.cn/problems/merge-k-sorted-lists/description/
 //
 // 题目描述：

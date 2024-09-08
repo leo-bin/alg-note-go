@@ -2,7 +2,7 @@ package 双指针解决链表问题
 
 import "testing"
 
-// 分隔链表 leetcode 86
+// 分隔链表 leetcode-86 mid
 // https://leetcode.cn/problems/partition-list/
 // 题目介绍：
 // 给你一个链表的头节点head和一个特定值x，请你对链表进行分隔，使得所有小于x的节点都出现在大于或等于x的节点之前

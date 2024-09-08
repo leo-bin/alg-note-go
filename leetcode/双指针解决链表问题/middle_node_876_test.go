@@ -2,7 +2,7 @@ package 双指针解决链表问题
 
 import "testing"
 
-// 链表的中间节点 leetcode 876
+// 链表的中间节点 leetcode-876 easy
 // https://leetcode.cn/problems/middle-of-the-linked-list/description/
 //
 // 题目描述：

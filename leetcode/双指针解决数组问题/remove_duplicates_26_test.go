@@ -2,7 +2,7 @@ package 双指针解决数组问题
 
 import "testing"
 
-// 删除有序数组中的重复项 leetcode-26
+// 删除有序数组中的重复项 leetcode-26 easy
 // https://leetcode.cn/problems/remove-duplicates-from-sorted-array/description/
 // 题目介绍：
 // 给你一个非严格递增排列的数组nums

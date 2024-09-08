@@ -2,7 +2,7 @@ package 双指针解决链表问题
 
 import "testing"
 
-// 合并两个有序链表，leetcode 21
+// 合并两个有序链表，leetcode-21 easy
 // https://leetcode.cn/problems/merge-two-sorted-lists/
 // 题目介绍：
 // 将两个升序链表合并为一个新的 升序 链表并返回

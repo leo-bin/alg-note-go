@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-// 环形链表，leetcode 141
+// 环形链表，leetcode-141 easy
 // https://leetcode.cn/problems/linked-list-cycle/description/
 // 题目描述：
 // 给你一个链表的头节点 head ，判断链表中是否有环。

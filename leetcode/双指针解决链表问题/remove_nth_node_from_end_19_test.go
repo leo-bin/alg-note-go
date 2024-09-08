@@ -2,7 +2,7 @@ package 双指针解决链表问题
 
 import "testing"
 
-// 删除链表倒数第N个节点，leetcode 19
+// 删除链表倒数第N个节点，leetcode-19 mid
 // https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/
 //
 // 题目描述：

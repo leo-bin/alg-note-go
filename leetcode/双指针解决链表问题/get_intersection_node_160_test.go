@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-// 相交链表，leetcode 160
+// 相交链表，leetcode-160 easy
 // https://leetcode.cn/problems/intersection-of-two-linked-lists/
 //
 // 题目描述:
