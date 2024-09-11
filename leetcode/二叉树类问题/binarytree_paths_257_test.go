@@ -27,12 +27,12 @@ func Test_BinaryTreePaths(t *testing.T) {
 func binaryTreePaths(root *TreeNode) []string {
 	var path []string
 	var res []string
-	traverse(root, &path, &res)
+	traversePaths(root, &path, &res)
 	return res
 }
 
 // traverse dfs遍历一遍即可
-func traverse(root *TreeNode, path *[]string, res *[]string) {
+func traversePaths(root *TreeNode, path *[]string, res *[]string) {
 	if root == nil {
 		return
 	}
@@ -45,8 +45,8 @@ func traverse(root *TreeNode, path *[]string, res *[]string) {
 	}
 	// 加入当前节点的值
 	*path = append(*path, strconv.Itoa(root.Val))
-	traverse(root.Left, path, res)
-	traverse(root.Right, path, res)
+	traversePaths(root.Left, path, res)
+	traversePaths(root.Right, path, res)
 	// 移除当前节点的值
 	*path = (*path)[:len(*path)-1]
 }

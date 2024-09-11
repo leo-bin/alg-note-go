@@ -61,11 +61,11 @@ func Test_MaxDepth(t *testing.T) {
 	}
 }
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
+//type TreeNode struct {
+//	Val   int
+//	Left  *TreeNode
+//	Right *TreeNode
+//}
 
 // maxDepth dfs回溯
 func maxDepth(root *TreeNode) int {
