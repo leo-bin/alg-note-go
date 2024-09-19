@@ -42,3 +42,32 @@ func traverseRightSideView(root *TreeNode, depth int, res *[]int) {
 	traverseRightSideView(root.Right, depth+1, res)
 	traverseRightSideView(root.Left, depth+1, res)
 }
+
+// rightSideViewV2 bfs
+// 思路：
+// 找每一层的最右边的元素
+func rightSideViewV2(root *TreeNode) []int {
+	// base case
+	if root == nil {
+		return []int{}
+	}
+	var res []int
+	q := []*TreeNode{root}
+	for len(q) > 0 {
+		var levelRes []int
+		levelSize := len(q)
+		for i := 0; i < levelSize; i++ {
+			cur := q[0]
+			q = q[1:]
+			levelRes = append(levelRes, cur.Val)
+			if cur.Left != nil {
+				q = append(q, cur.Left)
+			}
+			if cur.Right != nil {
+				q = append(q, cur.Right)
+			}
+		}
+		res = append(res, levelRes[levelSize-1])
+	}
+	return res
+}
