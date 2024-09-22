@@ -43,11 +43,11 @@ func Test_buildTree105(t *testing.T) {
 	}
 }
 
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
+//type TreeNode struct {
+//	Val   int
+//	Left  *TreeNode
+//	Right *TreeNode
+//}
 
 // buildTree dfs+前序和中序遍历的特点
 // 思路：
