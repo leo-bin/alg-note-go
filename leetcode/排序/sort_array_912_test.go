@@ -100,3 +100,46 @@ func partitionQuickSort(nums []int, l, r int) int {
 	nums[l], nums[j] = nums[j], nums[l]
 	return j
 }
+
+// mergeSort 归并排序，时间复杂度O（n*logn），空间复杂度O（n）
+// 思想：
+// 1.先分治，直到只剩下一个元素，那么它本身就是有序的，只需要对分治的结果进行在排序合并即可
+func mergeSort(nums []int, tmp []int, l, r int) {
+	// 1.递归结束条件
+	if l == r {
+		return
+	}
+	// 2.对原有数组不断二分
+	mid := l + (r-l)/2
+	mergeSort(nums, tmp, l, mid)
+	mergeSort(nums, tmp, mid+1, r)
+	// 3.合并l-mid和mid-r之间的元素
+	merge(nums, tmp, l, mid, r)
+}
+
+func merge(nums []int, tmp []int, l, mid, r int) {
+	// 1.复制待排序范围内的元素到tmp数组（l-r）
+	for i := 0; i < r; i++ {
+		tmp[i] = nums[i]
+	}
+	// 2.双指针技巧对l-mid和mid到r进行排序
+	i, j := l, mid+1
+	for p := l; p <= r; p++ {
+		if i == mid+1 {
+			// 说明i-mid范围内的元素都已排好，剩下的mid-j直接往后放
+			nums[p] = tmp[j]
+			j++
+		} else if j == r+1 {
+			// 说明mid-j范围内的元素已排好，剩下的mid-j直接往后放
+			nums[p] = tmp[i]
+			i++
+		} else if tmp[i] > tmp[j] {
+			// 小的先放
+			nums[p] = tmp[j]
+			j++
+		} else {
+			nums[p] = tmp[i]
+			i++
+		}
+	}
+}
