@@ -35,3 +35,119 @@ import "testing"
 func Test_LRUCache(t *testing.T) {
 
 }
+
+// LRUCache map+双向链表实现lru缓存
+// 思路：
+// 1.map是用来查找key的
+// 2.使用双向链表是为了能快速模拟队列的更新操作，把最近使用到的数据放到top1的位置，剔除最不经常使用的数据
+type LRUCache struct {
+	size  int
+	cpa   int
+	cache map[int]*LinkedNode
+	head  *LinkedNode
+	tail  *LinkedNode
+}
+
+type LinkedNode struct {
+	prev  *LinkedNode
+	next  *LinkedNode
+	key   int
+	value int
+}
+
+func InitLinkNode(key int, value int) *LinkedNode {
+	return &LinkedNode{
+		key:   key,
+		value: value,
+	}
+}
+
+// ConstructorLRUCache 构造lru对象
+func ConstructorLRUCache(capacity int) LRUCache {
+	lru := LRUCache{
+		size:  0,
+		cpa:   capacity,
+		cache: make(map[int]*LinkedNode, capacity),
+		head:  InitLinkNode(0, 0),
+		tail:  InitLinkNode(0, 0),
+	}
+	lru.head.next = lru.tail
+	lru.tail.prev = lru.head
+	return lru
+}
+
+// Get 逻辑：
+// 1.判断key在cache中是否存在
+// 2.不存在返回-1
+// 3.存在更新数据的使用频率
+func (this *LRUCache) Get(key int) int {
+	if node, ok := this.cache[key]; !ok {
+		return -1
+	} else {
+		// 1.把当前节点移动到链表top1位置
+		this.move2Top1(node)
+		// 2.返回节点的value
+		return node.value
+	}
+}
+
+// Put 逻辑
+// 1.判断key在cache中是否存在
+// 2.不存在：
+// 将key存储到cache中，然后新建一个node，将node直接放到链表top1位置，size++
+// 同时判断此时cache的size是否超过了容量，超过容量，要剔除最老的数据，size--
+// 3.存在，更新key对应的value数据，更新数据的使用率频率
+func (this *LRUCache) Put(key int, value int) {
+	if node, ok := this.cache[key]; !ok {
+		// 新建一个node
+		newNode := InitLinkNode(key, value)
+		// 数据加入cache
+		this.cache[key] = newNode
+		// 新node直接放入top1位置
+		this.add2Top1(newNode)
+		this.size++
+		// 判断容量是否超标
+		if this.size > this.cpa {
+			// 移除最后一个node
+			removed := this.removeTail()
+			// cache map中也要删除
+			delete(this.cache, removed.key)
+			// 容量+1
+			this.size--
+		}
+	} else {
+		// 更新key对应的value
+		node.value = value
+		// node移动到top1位置
+		this.move2Top1(node)
+	}
+}
+
+// move2Top1 移动node到top1位置
+func (this *LRUCache) move2Top1(node *LinkedNode) {
+	// 先把node在原有链表的关系移除
+	this.removeNode(node)
+	// 直接把node加入到top1为止
+	this.add2Top1(node)
+}
+
+// add2Top1 将node直接放到top1位置
+func (this *LRUCache) add2Top1(node *LinkedNode) {
+	this.head.next.prev = node
+	node.next = this.head.next
+	node.prev = this.head
+	this.head.next = node
+}
+
+// removeTail 从尾部移除一个node
+func (this *LRUCache) removeTail() *LinkedNode {
+	last := this.tail.prev
+	this.removeNode(last)
+	return last
+}
+
+// removeNode 把node从当前位置移除
+func (this *LRUCache) removeNode(node *LinkedNode) {
+	node.prev.next = node.next
+	node.next.prev = node.prev
+}
