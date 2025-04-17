@@ -71,3 +71,22 @@ func maxMeeting(x, y int) int {
 	}
 	return y
 }
+
+// v2 排序模拟
+func canAttendMeetings(intervals [][]int) bool {
+	// base case
+	if len(intervals) <= 1 {
+		return true
+	}
+	// 按照会议开始时间进行排序
+	sort.Slice(intervals, func(i, j int) bool {
+		return intervals[i][0] < intervals[j][0]
+	})
+	// 判断是否有重叠的会议室
+	for i := 0; i < len(intervals)-1; i++ {
+		if intervals[i][1] > intervals[i+1][0] {
+			return false
+		}
+	}
+	return true
+}

@@ -67,3 +67,27 @@ func majorityElementV2(nums []int) int {
 	}
 	return nums[len(nums)-1]
 }
+
+// 排序+双指针实现
+func majorityElementDemo(nums []int) int {
+	k := len(nums) / 2
+	i, j := 0, 0
+	// 1.排序
+	sort.Ints(nums)
+	// 2.双指针查找连续序列的长度
+	for j < len(nums) {
+		if nums[i] != nums[j] {
+			// 统计当前连续序列的长度
+			if j-i > k {
+				return nums[i]
+			}
+			i = j
+		}
+		j++
+	}
+	// 最后一段连续序列判断
+	if j-i > k {
+		return nums[i]
+	}
+	return -1
+}
