@@ -76,3 +76,44 @@ func buildTree105(preorder []int, inorder []int) *TreeNode {
 
 	return root
 }
+
+// 从先序和中序顺序构建二叉树，105,mid
+// https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+// 输入: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
+// 输出: [3,9,20,null,null,15,7]
+// dfs
+// 思路：
+// 1.先序遍历的第一个元素就是根节点
+// 2.中序遍历优先遍历左子树，在遍历根节点，然后是右子树
+// 3.先通过先序遍历找到根节点
+// 4.然后再中序遍历中找到根节点的左右子树数量
+// 5.递归构建树
+func buildTree(preorder []int, inorder []int) *TreeNode {
+	// base case
+	if len(preorder) <= 0 {
+		return nil
+	}
+	// 构建中序遍历元素映射表
+	hashInOrder := make(map[int]int)
+	for i := 0; i < len(inorder); i++ {
+		hashInOrder[inorder[i]] = i
+	}
+	var dfs func(preorder []int, preStart, preEnd int, inorder []int, inStart, inEnd int) *TreeNode
+	dfs = func(preorder []int, preStart, preEnd int, inorder []int, inStart, inEnd int) *TreeNode {
+		// 递归结束条件
+		if preStart > preEnd {
+			return nil
+		}
+		// 找根节点
+		root := &TreeNode{Val: preorder[preStart]}
+		rootIndex := hashInOrder[root.Val]
+		leftSize := rootIndex - inStart
+
+		// 分别构造左右子树
+		root.Left = dfs(preorder, preStart+1, preStart+leftSize, inorder, inStart, rootIndex-1)
+		root.Right = dfs(preorder, preStart+leftSize+1, preEnd, inorder, rootIndex+1, inEnd)
+
+		return root
+	}
+	return dfs(preorder, 0, len(preorder)-1, inorder, 0, len(inorder)-1)
+}
